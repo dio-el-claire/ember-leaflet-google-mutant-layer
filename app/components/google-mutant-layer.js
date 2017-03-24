@@ -1,0 +1,1 @@
+export { default } from 'ember-leaflet-google-mutant-layer/components/google-mutant-layer';

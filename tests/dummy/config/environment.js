@@ -16,6 +16,15 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    googleMutantLeaflet: {
+      apiKey: 'AIzaSyAjUXZOuJsJCx9zZo4duxLjzRtj1z-IKlM',
+      apiLibraries: ["geometry"]
+    },
+
+    googleLeaflet: {
+      include:false,
     }
   };
 

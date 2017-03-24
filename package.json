@@ -1,6 +1,6 @@
 {
   "name": "ember-leaflet-google-mutant-layer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
@@ -35,18 +35,22 @@
     "ember-data": "^2.7.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
+    "ember-leaflet": "3.0.10",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
-    "ember-welcome-page": "^1.0.1",
     "loader.js": "^4.0.1"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.6"
+    "ember-cli-babel": "^5.1.6",
+    "Leaflet.GridLayer.GoogleMutant": "https://gitlab.com/luiscamacho/Leaflet.GridLayer.GoogleMutant.git#e934ab533c3c6797c8f8f17979960fb96dcac36d"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "after": [
+      "ember-leaflet"
+    ]
   }
 }
