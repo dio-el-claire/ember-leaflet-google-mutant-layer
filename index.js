@@ -4,11 +4,9 @@
 module.exports = {
   name: 'ember-leaflet-google-mutant-layer',
 
-  included(app, parentAddon) {
-  	var target = (parentAddon || app);
-  	this._super.included(target);
-  	// console.log('================================', this.project.root +  '/node_modules/leaflet.gridLayer.googlemutant/Leaflet.GoogleMutant.js')
-  	target.import('/Users/dio/SItes/ember-leaflet-google-mutant-layer/node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
+  included(app) {
+  	this._super.included(app);
+ 		app.import(app.bowerDirectory + '/googlemutant/Leaflet.GoogleMutant.js');
   },
 
   contentFor: function(type, config) {
