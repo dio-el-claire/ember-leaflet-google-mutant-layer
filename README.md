@@ -22,12 +22,12 @@ var ENV = {
 };
 ```
 
-You may specify required google libriries:
+You may specify required google libraries:
 ```javascript
 var ENV = {
   // ...
   googleMutantLeaflet: {
-    libriries: ['geometry', ....]
+    libraries: ['geometry', ....]
   },
   // ...
 };
