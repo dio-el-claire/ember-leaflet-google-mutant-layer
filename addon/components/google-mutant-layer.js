@@ -1,33 +1,36 @@
+import Ember from 'ember';
 import BaseLayer from 'ember-leaflet/components/base-layer';
+
+const { observer } = Ember;
 
 export default BaseLayer.extend({
 
-  leafletRequiredOptions: [
-    'type' // Possible types: SATELLITE, ROADMAP, TERRAIN
-  ],
+  type: 'roadmap',  // Possible types: sattelite, roadmap, terrain. hybrid is not really supported
+
+  leafletRequiredOptions: ['type'],
 
   leafletOptions: [
-    'mapOptions', 'attribution', 'opacity', 'maxZoom'
+    'attribution', 'opacity', 'maxZoom', 'minZoom', 'maxNativeZoom', 'continuousWorld', 'noWrap', 'styles', 'type'
   ],
 
   leafletEvents: [
     'load', 'spawned'
   ],
 
-  leafletProperties: [
-    'opacity'
-  ],
+  leafletProperties: ['opacity'],
 
-  trafficLayer : new google.maps.TrafficLayer(),
+  trafficLayer : new window.google.maps.TrafficLayer(),
 
   isTrafficOn: false,
 
-  toggleTraffic: Ember.observer('isTrafficOn', function() {
+  toggleTraffic: observer('isTrafficOn', function() {
   	this.get('trafficLayer').setMap(this.get('isTrafficOn') ? this._layer._mutant : null); 
   }),
 
-  createLayer() {
-    return new this.L.GridLayer.GoogleMutant(...this.get('requiredOptions'), this.get('options'));
+  createLayer() { 
+    var options = this.get('options');
+    options.type = options.type.toLowerCase();
+    return  this.L.gridLayer.googleMutant(options);
   }
 
 });
