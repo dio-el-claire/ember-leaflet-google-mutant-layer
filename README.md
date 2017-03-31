@@ -22,14 +22,14 @@ var ENV = {
 };
 ```
 
-Also, you may specify required google libriries:
+You may specify required google libriries:
 ```javascript
-	var ENV = {
-	  // ...
-	  googleMutantLeaflet: {
-	    libraries: ['geometry', ....]
-	  },
-	  // ...
+var ENV = {
+  // ...
+  googleMutantLeaflet: {
+    libriries: ['geometry', ....]
+  },
+  // ...
 };
 ```
 
@@ -50,8 +50,6 @@ var ENV = {
 {{#leaflet-map lat=lat lng=lng zoom=zoom}}
 
   {{google-mutant-layer type="roadmap" isTrafficOn=true}}
-
-  {{heatmap-layer data=data options=options}}
 
 {{/leaflet-map}}
 ```
@@ -83,8 +81,6 @@ ENV.contentSecurityPolicy = {
 ```
 
 You can find out more information on the CSP addon page [here](https://github.com/rwjblue/ember-cli-content-security-policy#ember-cli-content-security-policy).
-
-## R
 
 ## Running
 
