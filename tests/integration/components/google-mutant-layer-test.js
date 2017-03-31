@@ -1,25 +1,89 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
+import GoogleMutantLayer from 'ember-leaflet-google-mutant-layer/components/google-mutant-layer';
 import hbs from 'htmlbars-inline-precompile';
 
+let googleMutant;
+
+const { run } = Ember;
+
 moduleForComponent('google-mutant-layer', 'Integration | Component | google mutant layer', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    this.register('component:google-mutant-layer', GoogleMutantLayer.extend({
+      init() {
+        this._super(...arguments);
+        googleMutant = this;
+      }
+    }));
+  }
 });
 
-test('it renders', function(assert) {
+test('map type is correctly set', function(assert) {
+  const done = assert.async();
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{google-mutant-layer}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
   this.render(hbs`
-    {{#google-mutant-layer}}
-      template block text
-    {{/google-mutant-layer}}
+    {{#leaflet-map lat=55.753445 lng=37.620418 zoom=10}}
+      {{google-mutant-layer type="terrain"}}
+    {{/leaflet-map}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  // Run later required to avoid error while handler for event 'idle' called once on map
+  run.later(() => {
+    assert.equal(googleMutant._layer._mutant.mapTypeId, 'terrain');
+    done();
+  }, 1250);
+
 });
+
+
+test('opacity', function (assert) {
+  const done = assert.async();
+
+  this.set('opacity', 0.7);
+
+  this.render(hbs`
+    {{#leaflet-map lat=55.753445 lng=37.620418 zoom=10}}
+      {{google-mutant-layer type="ROADMAP" opacity=opacity}}
+    {{/leaflet-map}}
+  `);
+
+  run.later(() => { done(); }, 1000);
+
+  assert.equal(Math.round($('.leaflet-google-mutant').css('opacity')*10)/10, 0.7);
+
+  this.set('opacity', 0.5);
+  assert.equal(Math.round($('.leaflet-google-mutant').css('opacity')*10)/10, 0.5); 
+
+});
+
+test('sends action for load and spawned events', function (assert) {
+  const done = assert.async();
+
+  assert.expect(2);
+
+  this.set('loadAction', () => {
+    assert.ok(true, 'loading fired');
+  });
+
+  this.set('spawnedAction', () => {
+    assert.ok(true, 'spawned fired');
+  });
+
+  this.render(hbs`
+    <style type="text/css">
+      .leaflet-container { height:500px; }
+    </style>
+    <div style="width:100%; height:500px; position:relative">
+    {{#leaflet-map lat=55.753445 lng=37.620418 zoom=10}}
+      {{google-mutant-layer onSpawned=(action loadAction) onLoad=(action loadAction)}}
+    {{/leaflet-map}}
+    </div>
+  `);
+
+  run.later(() => { done(); }, 1000);
+});
+
+
+
