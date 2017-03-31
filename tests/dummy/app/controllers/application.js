@@ -7,5 +7,6 @@ export default Ember.Controller.extend({
   	toggleTraffic() {
   		this.toggleProperty('isTrafficOn');
   	}
+
   }
 });
