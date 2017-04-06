@@ -1,6 +1,6 @@
 {
   "name": "ember-leaflet-google-mutant-layer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
@@ -11,11 +11,11 @@
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": "",
+  "repository": "https://github.com/dio-el-claire/ember-leaflet-google-mutant-layer",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Dmitry (dio) Levashov",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
