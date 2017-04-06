@@ -3,6 +3,17 @@
 Adds [Leaflet.GridLayer.GoogleMutant](https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant/tree/master) functionality into [Ember-Leaflet](http://ember-leaflet.com).
 Also, addon allows you to use google.trafficLayer on the map.
 
+## Compatibility
+* Leaflet.GridLayer.GoogleMutant plugin doesn't work on IE10 or lower, as that browser doesn't implement DOM mutation observers. Chrome, Firefox, Safari, IE11 and Edge are fine.
+* IE11 and [browsers that don't support Promises](http://caniuse.com/#search=promise) need a polyfill in order to work. See example below.
+
+Include the following before the script element that references the GoogleMutant javascript file.
+```javascript
+<script src="https://unpkg.com/es6-promise@4.0.5/dist/es6-promise.min.js"></script>
+<script>ES6Promise.polyfill();</script>
+
+```
+This will polyfill in Javascript Promises for IE.
 
 ## Installation
 
