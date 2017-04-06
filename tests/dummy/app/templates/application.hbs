@@ -1,12 +1,11 @@
 <style type="text/css">
 	.leaflet-container {
-		/*width:100%;*/
 		height:500px;
 	}
 </style>
 <div style="width:100%; height:500px; position:relative">
 	{{#leaflet-map lat=55.753445 lng=37.620418 zoom=10}}
-	  {{google-mutant-layer type="TERRAIN" isTrafficOn=isTrafficOn continuousWorld=true noWrap=true streetViewControl=true}}
+	  {{google-mutant-layer type="TERRAIN" isTrafficOn=isTrafficOn continuousWorld=true noWrap=true}}
 	{{/leaflet-map}}
 </div>
 <div>

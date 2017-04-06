@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-	isTrafficOn: false,
+	isTrafficOn: true,
 
   actions: {
   	toggleTraffic() {
