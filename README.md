@@ -1,7 +1,7 @@
 # Ember-leaflet-google-mutant-layer
 
 Adds [Leaflet.GridLayer.GoogleMutant](https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant/tree/master) functionality into [Ember-Leaflet](http://ember-leaflet.com).
-Also, addon allows to use google.trafficLayer on map.
+Also, addon allows you to use google.trafficLayer on the map.
 
 
 ## Installation
