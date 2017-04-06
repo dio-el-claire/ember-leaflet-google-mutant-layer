@@ -10,6 +10,6 @@ module.exports = {
   },
 
   afterInstall: function(options) {
-    return this.addBowerPackageToProject('googlemutant', 'https://gitlab.com/luiscamacho/Leaflet.GridLayer.GoogleMutant.git#e934ab533c3c6797c8f8f17979960fb96dcac36d');
+    return this.addBowerPackageToProject('googlemutant', 'https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant.git');
   }
 };
