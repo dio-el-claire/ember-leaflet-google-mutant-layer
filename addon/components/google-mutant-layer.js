@@ -27,6 +27,10 @@ export default BaseLayer.extend({
   	this.get('trafficLayer').setMap(this.get('isTrafficOn') ? this._layer._mutant : null); 
   }),
 
+  _spawned() {
+    this.toggleTraffic();
+  },
+
   createLayer() { 
     var options = this.get('options');
     options.type = options.type.toLowerCase();
