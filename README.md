@@ -1,7 +1,7 @@
 # Ember-leaflet-google-mutant-layer
 
 Adds [Leaflet.GridLayer.GoogleMutant](https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant/tree/master) functionality into [Ember-Leaflet](http://ember-leaflet.com).
-Also, addon allows you to use google.trafficLayer on the map.
+Also, addon supports google map layers (TrafficLayer, TransitLayer, BicyclingLayer, KmlLayer).
 
 ## Compatibility
 * Leaflet.GridLayer.GoogleMutant plugin doesn't work on IE10 or lower, as that browser doesn't implement DOM mutation observers. Chrome, Firefox, Safari, IE11 and Edge are fine.
@@ -60,7 +60,7 @@ var ENV = {
 ```handlebars
 {{#leaflet-map lat=lat lng=lng zoom=zoom}}
 
-  {{google-mutant-layer type="roadmap" isTrafficOn=true}}
+  {{google-mutant-layer type="roadmap" TrafficLayer=true}}
 
 {{/leaflet-map}}
 ```
@@ -68,7 +68,11 @@ var ENV = {
 ### Options
 
 * `type` google map type id, default `roadmap`
-* `isTrafficOn` flag - show traffic layer, default `false`
+* `TrafficLayer` show traffic layer, default `false`
+* `TransitLayer` show transit layer, default `false`
+* `BicyclingLayer` show bicycling layer, default `false`
+* `KmlLayer` show KmlLayer (geo rss) layer, default `false`
+* `KmlLayerOptions` hash with KmlLayer options (url)
 * `opacity` map opacity, default `1`
 * `maxZoom` default `18`
 * `maxNativeZoom` default `21`
