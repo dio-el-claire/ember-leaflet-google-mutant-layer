@@ -1,0 +1,14 @@
+
+# 0.0.8
+
+* Leaflet.GridLayer.GoogleMutant updated to 0.6.0
+* Install Leaflet.GridLayer.GoogleMutant from npm
+* Blueprint removed
+
+# 0.0.7
+
+* Docs updated
+
+# 0.0.6
+
+* Add suport for google TransitLayer/BicyclingLayer/KmlLayer layers
