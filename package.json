@@ -10,7 +10,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:each",
-    "deploy": "./publish.sh",
+    "deploy": "./publish.sh"
   },
   "repository": "https://github.com/dio-el-claire/ember-leaflet-google-mutant-layer",
   "engines": {
