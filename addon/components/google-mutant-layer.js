@@ -19,16 +19,39 @@ export default BaseLayer.extend({
 
   leafletProperties: ['opacity'],
 
-  trafficLayer : new window.google.maps.TrafficLayer(),
+  TrafficLayer: false,
 
-  isTrafficOn: false,
+  TransitLayer: false,
 
-  toggleTraffic: observer('isTrafficOn', function() {
-  	this.get('trafficLayer').setMap(this.get('isTrafficOn') ? this._layer._mutant : null); 
+  BicyclingLayer: false,
+
+  KmlLayer: false,
+
+  toggleTraffic: observer('TrafficLayer', function() {
+    this.updateGoogleLayer('TrafficLayer');
   }),
+
+  toggleTransit: observer('TransitLayer', function () {
+    this.updateGoogleLayer('TransitLayer');
+  }),
+
+  toggleBicycling: observer('BicyclingLayer', function () {
+    this.updateGoogleLayer('BicyclingLayer');
+  }),
+
+  toggleKml: observer('KmlLayer', function () {
+    this.updateGoogleLayer('KmlLayer', this.get('KmlLayerOptions'));
+  }),
+
+  updateGoogleLayer(layer, options) {
+    this._layer[this.get(layer) ? 'addGoogleLayer' : 'removeGoogleLayer'](layer, options);
+  },
 
   _spawned() {
     this.toggleTraffic();
+    this.toggleTransit();
+    this.toggleBicycling();
+    this.toggleKml();
   },
 
   createLayer() { 
