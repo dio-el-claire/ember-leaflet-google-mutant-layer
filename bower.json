@@ -4,7 +4,6 @@
     "ember": "~2.7.0",
     "ember-cli-shims": "0.1.1",
     "ember-qunit-notifications": "0.1.0",
-    "leaflet": "^1.0.0",
-    "googlemutant": "https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant.git"
+    "leaflet": "^1.0.0"
   }
 }
