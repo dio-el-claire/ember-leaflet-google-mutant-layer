@@ -85,5 +85,56 @@ test('sends action for load and spawned events', function (assert) {
   run.later(() => { done(); }, 1000);
 });
 
+test('google layers', function (assert) {
+  const done = assert.async();
 
+  this.setProperties({
+    trafficLayer: true,
+    transitLayer: true,
+    bicycleLayer: true,
+    geoRSSLayer: true,
+    geoRSSOptions: { url: 'http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss' }
+  });
+
+  this.render(hbs`
+    <style type="text/css">
+      .leaflet-container { height:500px; }
+    </style>
+    <div style="width:100%; height:500px; position:relative">
+    {{#leaflet-map lat=55.753445 lng=37.620418 zoom=10}}
+      {{google-mutant-layer 
+        TrafficLayer=trafficLayer
+        TransitLayer=transitLayer
+        BicyclingLayer=bicycleLayer
+        KmlLayer=geoRSSLayer
+        KmlLayerOptions=geoRSSOptions
+      }}
+    {{/leaflet-map}}
+    </div>
+  `);
+
+  run.later(() => { 
+    assert.ok(googleMutant._layer._subLayers.TrafficLayer, 'TrafficLayer');
+    assert.ok(googleMutant._layer._subLayers.TransitLayer, 'TransitLayer');
+    assert.ok(googleMutant._layer._subLayers.BicyclingLayer, 'BicyclingLayer');
+    assert.ok(googleMutant._layer._subLayers.KmlLayer, 'KmlLayer');
+
+    this.setProperties({
+      trafficLayer: false,
+      transitLayer: false,
+      bicycleLayer: false,
+      geoRSSLayer: false,
+    });
+    
+    run.next(() => { 
+      assert.notOk(googleMutant._layer._subLayers.TrafficLayer, 'TrafficLayer');
+      assert.notOk(googleMutant._layer._subLayers.TransitLayer, 'TransitLayer');
+      assert.notOk(googleMutant._layer._subLayers.BicyclingLayer, 'BicyclingLayer');
+      assert.notOk(googleMutant._layer._subLayers.KmlLayer, 'KmlLayer');
+      done(); 
+    });
+    
+  }, 500);
+
+});
 
