@@ -1,9 +1,8 @@
+/* global google */
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import GoogleMutantLayer from 'ember-leaflet-google-mutant-layer/components/google-mutant-layer';
 import hbs from 'htmlbars-inline-precompile';
-
-let googleMutant;
 
 const { run } = Ember;
 
@@ -11,10 +10,12 @@ moduleForComponent('google-mutant-layer', 'Integration | Component | google muta
   integration: true,
 
   beforeEach() {
+    var module = this;
+
     this.register('component:google-mutant-layer', GoogleMutantLayer.extend({
       init() {
         this._super(...arguments);
-        googleMutant = this;
+        module.googleMutant = this;
       }
     }));
   }
@@ -29,11 +30,12 @@ test('map type is correctly set', function(assert) {
     {{/leaflet-map}}
   `);
 
-  // Run later required to avoid error while handler for event 'idle' called once on map
-  run.later(() => {
-    assert.equal(googleMutant._layer._mutant.mapTypeId, 'terrain');
-    done();
-  }, 1250);
+  run.next(() => { 
+    google.maps.event.addListenerOnce(this.googleMutant._layer._mutant, 'idle', () => {
+      done();  
+    });
+    assert.equal(this.googleMutant._layer._mutant.mapTypeId, 'terrain');
+  });
 
 });
 
@@ -49,13 +51,17 @@ test('opacity', function (assert) {
     {{/leaflet-map}}
   `);
 
-  run.later(() => { done(); }, 1000);
 
-  assert.equal(Math.round($('.leaflet-google-mutant').css('opacity')*10)/10, 0.7);
 
-  this.set('opacity', 0.5);
-  assert.equal(Math.round($('.leaflet-google-mutant').css('opacity')*10)/10, 0.5); 
+  run.next(() => { 
+    assert.equal(Math.round($('.leaflet-google-mutant').css('opacity')*10)/10, 0.7);
+    this.set('opacity', 0.5);
+    assert.equal(Math.round($('.leaflet-google-mutant').css('opacity')*10)/10, 0.5); 
 
+    google.maps.event.addListenerOnce(this.googleMutant._layer._mutant, 'idle', () => {
+      done();  
+    });
+  });
 });
 
 test('sends action for load and spawned events', function (assert) {
@@ -82,7 +88,11 @@ test('sends action for load and spawned events', function (assert) {
     </div>
   `);
 
-  run.later(() => { done(); }, 1000);
+  run.next(() => { 
+    google.maps.event.addListenerOnce(this.googleMutant._layer._mutant, 'idle', () => {
+      done();  
+    });
+  });
 });
 
 test('google layers', function (assert) {
@@ -113,11 +123,11 @@ test('google layers', function (assert) {
     </div>
   `);
 
-  run.later(() => { 
-    assert.ok(googleMutant._layer._subLayers.TrafficLayer, 'TrafficLayer');
-    assert.ok(googleMutant._layer._subLayers.TransitLayer, 'TransitLayer');
-    assert.ok(googleMutant._layer._subLayers.BicyclingLayer, 'BicyclingLayer');
-    assert.ok(googleMutant._layer._subLayers.KmlLayer, 'KmlLayer');
+  run.next(() => { 
+    assert.ok(this.googleMutant._layer._subLayers.TrafficLayer, 'TrafficLayer');
+    assert.ok(this.googleMutant._layer._subLayers.TransitLayer, 'TransitLayer');
+    assert.ok(this.googleMutant._layer._subLayers.BicyclingLayer, 'BicyclingLayer');
+    assert.ok(this.googleMutant._layer._subLayers.KmlLayer, 'KmlLayer');
 
     this.setProperties({
       trafficLayer: false,
@@ -126,15 +136,15 @@ test('google layers', function (assert) {
       geoRSSLayer: false,
     });
     
-    run.next(() => { 
-      assert.notOk(googleMutant._layer._subLayers.TrafficLayer, 'TrafficLayer');
-      assert.notOk(googleMutant._layer._subLayers.TransitLayer, 'TransitLayer');
-      assert.notOk(googleMutant._layer._subLayers.BicyclingLayer, 'BicyclingLayer');
-      assert.notOk(googleMutant._layer._subLayers.KmlLayer, 'KmlLayer');
-      done(); 
-    });
+    assert.notOk(this.googleMutant._layer._subLayers.TrafficLayer, 'TrafficLayer');
+    assert.notOk(this.googleMutant._layer._subLayers.TransitLayer, 'TransitLayer');
+    assert.notOk(this.googleMutant._layer._subLayers.BicyclingLayer, 'BicyclingLayer');
+    assert.notOk(this.googleMutant._layer._subLayers.KmlLayer, 'KmlLayer');
     
-  }, 500);
+    google.maps.event.addListenerOnce(this.googleMutant._layer._mutant, 'idle', () => {
+      done();  
+    });
+  });
 
 });
 
