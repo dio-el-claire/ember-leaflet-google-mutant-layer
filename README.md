@@ -68,11 +68,11 @@ var ENV = {
 ### Options
 
 * `type` google map type id, default `roadmap`
-* `TrafficLayer` show traffic layer, default `false`
-* `TransitLayer` show transit layer, default `false`
-* `BicyclingLayer` show bicycling layer, default `false`
-* `KmlLayer` show KmlLayer (geo rss) layer, default `false`
-* `KmlLayerOptions` hash with KmlLayer options (url)
+* `isTrafficOn` show traffic layer, default `false`
+* `isTransitOn` show transit layer, default `false`
+* `isBicyclingOn` show bicycling layer, default `false`
+* `isKmlOn` show KmlLayer (geo rss) layer, default `false`
+* `kmlLayerOptions` hash with KmlLayer options (url)
 * `opacity` map opacity, default `1`
 * `maxZoom` default `18`
 * `maxNativeZoom` default `21`
