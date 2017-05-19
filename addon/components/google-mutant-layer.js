@@ -19,32 +19,32 @@ export default BaseLayer.extend({
 
   leafletProperties: ['opacity'],
 
-  TrafficLayer: false,
+  isTrafficOn: false,
 
-  TransitLayer: false,
+  isTransitOn: false,
 
-  BicyclingLayer: false,
+  isBicyclingOn: false,
 
-  KmlLayer: false,
+  isKmlOn: false,
 
-  toggleTraffic: observer('TrafficLayer', function() {
-    this.updateGoogleLayer('TrafficLayer');
+  toggleTraffic: observer('isTrafficOn', function() {
+    this.updateGoogleLayer('TrafficLayer', this.get('isTrafficOn'));
   }),
 
-  toggleTransit: observer('TransitLayer', function () {
-    this.updateGoogleLayer('TransitLayer');
+  toggleTransit: observer('isTransitOn', function () {
+    this.updateGoogleLayer('TransitLayer', this.get('isTransitOn'));
   }),
 
-  toggleBicycling: observer('BicyclingLayer', function () {
-    this.updateGoogleLayer('BicyclingLayer');
+  toggleBicycling: observer('isBicyclingOn', function () {
+    this.updateGoogleLayer('BicyclingLayer', this.get('isBicyclingOn'));
   }),
 
-  toggleKml: observer('KmlLayer', function () {
-    this.updateGoogleLayer('KmlLayer', this.get('KmlLayerOptions'));
+  toggleKml: observer('isKmlOn', function () {
+    this.updateGoogleLayer('KmlLayer', this.get('isKmlOn'), this.get('kmlLayerOptions'));
   }),
 
-  updateGoogleLayer(layer, options) {
-    this._layer[this.get(layer) ? 'addGoogleLayer' : 'removeGoogleLayer'](layer, options);
+  updateGoogleLayer(layer, show, options) {
+    this._layer[show ? 'addGoogleLayer' : 'removeGoogleLayer'](layer, options);
   },
 
   _spawned() {
