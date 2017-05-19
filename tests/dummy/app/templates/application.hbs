@@ -30,39 +30,39 @@
 <div class="container">
 	{{#leaflet-map lat=lat lng=lng zoom=zoom}}
 	  {{google-mutant-layer type="TERRAIN" 
-	  	TrafficLayer=trafficLayer 
-	  	TransitLayer=transitLayer
-	  	BicyclingLayer=bicycleLayer
-	  	KmlLayer=geoRSSLayer
-	  	KmlLayerOptions=geoRSSOptions
+	  	isTrafficOn=isTrafficOn 
+	  	isTransitOn=isTransitOn
+	  	isBicyclingOn=isBicyclingOn
+	  	isKmlOn=isKmlOn
+	  	kmlLayerOptions=geoRSSOptions
 	  	continuousWorld=true 
 	  	noWrap=true}}
 	{{/leaflet-map}}
 </div>
 <div class="buttons">
 	<button {{action "toggleTraffic"}}>
-		{{#if trafficLayer}}
+		{{#if isTrafficOn}}
 			Hide traffic
 		{{else}}
 			Show traffic
 		{{/if}}
 	</button>
 	<button {{action "toggleTransit"}}>
-		{{#if transitLayer}}
+		{{#if isTransitOn}}
 			Hide transit
 		{{else}}
 			Show transit
 		{{/if}}
 	</button>
 	<button {{action "toggleBicycle"}}>
-		{{#if bicycleLayer}}
+		{{#if isBicyclingOn}}
 			Hide bicycling layer
 		{{else}}
 			Show bicycling layer
 		{{/if}}
 	</button>
 	<button {{action "toggleRSS"}}>
-		{{#if geoRSSLayer}}
+		{{#if isKmlOn}}
 			Hide geo rss
 		{{else}}
 			Show geo rss

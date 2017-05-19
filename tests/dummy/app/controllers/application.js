@@ -7,13 +7,13 @@ export default Ember.Controller.extend({
 
 	lng: -118.24104309082031,
 
-	trafficLayer: false,
+	isTrafficOn: false,
 
-	transitLayer: false,
+	isTransitOn: false,
 
-	bicycleLayer: false,
+	isBicyclingOn: false,
 
-	geoRSSLayer: false,
+	isKmlOn: false,
 
 	geoRSSOptions: {
 		url: 'http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss'
@@ -21,30 +21,30 @@ export default Ember.Controller.extend({
 
   actions: {
   	toggleTraffic() {
-  		this.toggleProperty('trafficLayer');
+  		this.toggleProperty('isTrafficOn');
   	},
 
   	toggleTransit() {
   		
-  		if (!this.get('transitLayer')) {
+  		if (!this.get('isTransitOn')) {
   			this.setProperties({lat: 51.501904, lng: -0.115871, zoom: 13});
   		}
-  		this.toggleProperty('transitLayer');
+  		this.toggleProperty('isTransitOn');
   	},
 
   	toggleBicycle() {
-  		if (!this.get('bicycleLayer')) {
+  		if (!this.get('isBicyclingOn')) {
 				this.setProperties({
 					lat:42.3726399,
 					lng: -71.1096528,
 					zoom: 14
 				});
   		}
-  		this.toggleProperty('bicycleLayer');
+  		this.toggleProperty('isBicyclingOn');
   	},
 
   	toggleRSS() {
-  		if (!this.get('geoRSSLayer')) {
+  		if (!this.get('isKmlOn')) {
 				this.setProperties({
 					lat: 49.496675, 
 					lng: -102.65625,
@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
 				});
 
   		}
-	   	this.toggleProperty('geoRSSLayer');
+	   	this.toggleProperty('isKmlOn');
   	}
 
   }
