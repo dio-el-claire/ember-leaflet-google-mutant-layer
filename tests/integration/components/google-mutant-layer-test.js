@@ -99,10 +99,10 @@ test('google layers', function (assert) {
   const done = assert.async();
 
   this.setProperties({
-    trafficLayer: true,
-    transitLayer: true,
-    bicycleLayer: true,
-    geoRSSLayer: true,
+    isTrafficOn: true,
+    isTransitOn: true,
+    isBicyclingOn: true,
+    isKmlOn: true,
     geoRSSOptions: { url: 'http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss' }
   });
 
@@ -113,10 +113,10 @@ test('google layers', function (assert) {
     <div style="width:100%; height:500px; position:relative">
     {{#leaflet-map lat=55.753445 lng=37.620418 zoom=10}}
       {{google-mutant-layer 
-        TrafficLayer=trafficLayer
-        TransitLayer=transitLayer
-        BicyclingLayer=bicycleLayer
-        KmlLayer=geoRSSLayer
+        isTrafficOn=isTrafficOn
+        isTransitOn=isTransitOn
+        isBicyclingOn=isBicyclingOn
+        isKmlOn=isKmlOn
         KmlLayerOptions=geoRSSOptions
       }}
     {{/leaflet-map}}
@@ -130,10 +130,10 @@ test('google layers', function (assert) {
     assert.ok(this.googleMutant._layer._subLayers.KmlLayer, 'KmlLayer');
 
     this.setProperties({
-      trafficLayer: false,
-      transitLayer: false,
-      bicycleLayer: false,
-      geoRSSLayer: false,
+      isTrafficOn: false,
+      isTransitOn: false,
+      isBicyclingOn: false,
+      isKmlOn: false,
     });
     
     assert.notOk(this.googleMutant._layer._subLayers.TrafficLayer, 'TrafficLayer');
