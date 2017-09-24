@@ -45,9 +45,9 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.6",
     "broccoli-funnel": "^1.1.0",
-    "fastboot-filter-initializers": "0.0.2",
+    "ember-cli-babel": "^5.1.6",
+    "fastboot-transform": "^0.1.2",
     "leaflet.gridlayer.googlemutant": "^0.6.1"
   },
   "ember-addon": {

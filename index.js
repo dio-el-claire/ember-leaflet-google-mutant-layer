@@ -4,21 +4,18 @@ const resolve = require('resolve');
 const path = require('path');
 const Funnel = require('broccoli-funnel');
 const mergeTrees = require('broccoli-merge-trees');
-const filterInitializers = require('fastboot-filter-initializers');
+const fastbootTransform = require('fastboot-transform');
 
 module.exports = {
   name: 'ember-leaflet-google-mutant-layer',
 
-  preconcatTree(tree) {
-    return filterInitializers(tree, this.app.name);
-  },
-
-  treeForVendor: function() {
+  treeForVendor() {
     let dist = this.pathBase('leaflet.gridlayer.googlemutant');
 
-    return mergeTrees([
-      new Funnel(dist, { destDir: 'leaflet.gridlayer.googlemutant' })
-    ]);
+    return fastbootTransform(new Funnel(dist, {
+      files: ['Leaflet.GoogleMutant.js'],
+      destDir: 'leaflet.gridlayer.googlemutant'
+    }));
   },
 
   included(app) {
@@ -42,18 +39,14 @@ module.exports = {
      app = current.app || app;
     } while (current.parent.parent && (current = current.parent));
 
-    // import javascript only if not in fastboot
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      // app.import('vendor/shims/leaflet.js');
-      app.import('vendor/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
-    }
+    app.import('vendor/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
   },
 
-  pathBase: function(packageName) {
+  pathBase(packageName) {
     return path.dirname(resolve.sync(packageName + '/package.json', { basedir: __dirname }));
   },
 
-    contentFor: function(type, config) {
+  contentFor(type, config) {
     if (type === 'head') {
       var config = config.googleMutantLeaflet || {};
       if (config.include !== false) {
@@ -68,5 +61,4 @@ module.exports = {
       }
     }
   }
-
 };
