@@ -60,7 +60,7 @@ var ENV = {
 ```handlebars
 {{#leaflet-map lat=lat lng=lng zoom=zoom}}
 
-  {{google-mutant-layer type="roadmap" TrafficLayer=true}}
+  {{google-mutant-layer type="roadmap" isTrafficOn=true}}
 
 {{/leaflet-map}}
 ```
