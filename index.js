@@ -54,8 +54,8 @@ module.exports = {
         if (config.apiKey) {
           params.push(`key=${config.apiKey}`);
         }
-        if (config.apiLibraries) {
-          params.push('libraries=' + config.apiLibraries.join(','));
+        if (config.libraries) {
+          params.push('libraries=' + config.libraries.join(','));
         }
         return '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js' + (params ? '?' + params.join('&') : '') + '"></script>';
       }
