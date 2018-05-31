@@ -57,6 +57,12 @@ module.exports = {
         if (config.libraries) {
           params.push('libraries=' + config.libraries.join(','));
         }
+        if (config.client) {
+          params.push(`client=${config.client}`);
+        }
+        if (config.v) {
+          params.push(`v=${config.v}`);
+        }
         return '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js' + (params ? '?' + params.join('&') : '') + '"></script>';
       }
     }
