@@ -3,7 +3,8 @@
   "version": "0.0.14",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember-leaflet"
   ],
   "repository": "https://github.com/dio-el-claire/ember-leaflet-google-mutant-layer",
   "license": "MIT",
