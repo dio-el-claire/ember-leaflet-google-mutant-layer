@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 const resolve = require('resolve');
 const path = require('path');
@@ -7,7 +6,7 @@ const mergeTrees = require('broccoli-merge-trees');
 const fastbootTransform = require('fastboot-transform');
 
 module.exports = {
-  name: 'ember-leaflet-google-mutant-layer',
+  name: require('./package').name,
 
   treeForVendor() {
     let dist = this.pathBase('leaflet.gridlayer.googlemutant');
