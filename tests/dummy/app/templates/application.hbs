@@ -1,13 +1,13 @@
 <style type="text/css">
-	html, body {
+  html, body {
     height: 100%;
     margin: 0;
     padding: 0;
   }
 
   .container {
-  	width:100%; 
-  	height:calc(100% - 40px); 
+  	width:100%;
+  	height:calc(100% - 40px);
   	position:absolute;
   }
 
@@ -28,44 +28,44 @@
 	}
 </style>
 <div class="container">
-	{{#leaflet-map lat=lat lng=lng zoom=zoom}}
-	  {{google-mutant-layer type="TERRAIN" 
-	  	isTrafficOn=isTrafficOn 
+  {{#leaflet-map lat=lat lng=lng zoom=zoom}}
+    {{google-mutant-layer type="TERRAIN"
+	  	isTrafficOn=isTrafficOn
 	  	isTransitOn=isTransitOn
 	  	isBicyclingOn=isBicyclingOn
 	  	isKmlOn=isKmlOn
 	  	kmlLayerOptions=geoRSSOptions
-	  	continuousWorld=true 
+	  	continuousWorld=true
 	  	noWrap=true}}
-	{{/leaflet-map}}
+  {{/leaflet-map}}
 </div>
 <div class="buttons">
-	<button {{action "toggleTraffic"}}>
-		{{#if isTrafficOn}}
-			Hide traffic
-		{{else}}
-			Show traffic
-		{{/if}}
-	</button>
-	<button {{action "toggleTransit"}}>
-		{{#if isTransitOn}}
-			Hide transit
-		{{else}}
-			Show transit
-		{{/if}}
-	</button>
-	<button {{action "toggleBicycle"}}>
-		{{#if isBicyclingOn}}
-			Hide bicycling layer
-		{{else}}
-			Show bicycling layer
-		{{/if}}
-	</button>
-	<button {{action "toggleRSS"}}>
-		{{#if isKmlOn}}
-			Hide geo rss
-		{{else}}
-			Show geo rss
-		{{/if}}
-	</button>
+  <button {{action "toggleTraffic"}}>
+    {{#if isTrafficOn}}
+      Hide traffic
+    {{else}}
+      Show traffic
+    {{/if}}
+  </button>
+  <button {{action "toggleTransit"}}>
+    {{#if isTransitOn}}
+      Hide transit
+    {{else}}
+      Show transit
+    {{/if}}
+  </button>
+  <button {{action "toggleBicycle"}}>
+    {{#if isBicyclingOn}}
+      Hide bicycling layer
+    {{else}}
+      Show bicycling layer
+    {{/if}}
+  </button>
+  <button {{action "toggleRSS"}}>
+    {{#if isKmlOn}}
+      Hide geo rss
+    {{else}}
+      Show geo rss
+    {{/if}}
+  </button>
 </div>
