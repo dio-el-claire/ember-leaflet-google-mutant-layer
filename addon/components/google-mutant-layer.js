@@ -1,23 +1,21 @@
-import Ember from 'ember';
+import { observer } from '@ember/object';
 import BaseLayer from 'ember-leaflet/components/base-layer';
-
-const { observer } = Ember;
 
 export default BaseLayer.extend({
 
   type: 'roadmap',  // Possible types: sattelite, roadmap, terrain. hybrid is not really supported
 
-  leafletRequiredOptions: ['type'],
+  leafletRequiredOptions: Object.freeze(['type']),
 
-  leafletOptions: [
+  leafletOptions: Object.freeze([
     'attribution', 'opacity', 'maxZoom', 'minZoom', 'maxNativeZoom', 'continuousWorld', 'noWrap', 'styles', 'type'
-  ],
+  ]),
 
-  leafletEvents: [
+  leafletEvents: Object.freeze([
     'load', 'spawned'
-  ],
+  ]),
 
-  leafletProperties: ['opacity'],
+  leafletProperties: Object.freeze(['opacity']),
 
   isTrafficOn: false,
 
@@ -27,18 +25,22 @@ export default BaseLayer.extend({
 
   isKmlOn: false,
 
+  // eslint-disable-next-line ember/no-observers
   toggleTraffic: observer('isTrafficOn', function() {
     this.updateGoogleLayer('TrafficLayer', this.get('isTrafficOn'));
   }),
 
+  // eslint-disable-next-line ember/no-observers
   toggleTransit: observer('isTransitOn', function () {
     this.updateGoogleLayer('TransitLayer', this.get('isTransitOn'));
   }),
 
+  // eslint-disable-next-line ember/no-observers
   toggleBicycling: observer('isBicyclingOn', function () {
     this.updateGoogleLayer('BicyclingLayer', this.get('isBicyclingOn'));
   }),
 
+  // eslint-disable-next-line ember/no-observers
   toggleKml: observer('isKmlOn', function () {
     this.updateGoogleLayer('KmlLayer', this.get('isKmlOn'), this.get('kmlLayerOptions'));
   }),
@@ -54,7 +56,7 @@ export default BaseLayer.extend({
     this.toggleKml();
   },
 
-  createLayer() { 
+  createLayer() {
     var options = this.get('options');
     options.type = options.type.toLowerCase();
     return  this.L.gridLayer.googleMutant(options);
