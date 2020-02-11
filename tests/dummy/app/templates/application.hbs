@@ -27,42 +27,48 @@
 		margin: 10px 5px 0 5px;
 	}
 </style>
+
 <div class="container">
-  {{#leaflet-map lat=lat lng=lng zoom=zoom}}
-    {{google-mutant-layer type="TERRAIN"
-	  	isTrafficOn=isTrafficOn
-	  	isTransitOn=isTransitOn
-	  	isBicyclingOn=isBicyclingOn
-	  	isKmlOn=isKmlOn
-	  	kmlLayerOptions=geoRSSOptions
-	  	continuousWorld=true
-	  	noWrap=true}}
-  {{/leaflet-map}}
+  <LeafletMap @lat={{this.lat}} @lng={{this.lng}} @zoom={{this.zoom}} as |layers|>
+    <layers.google-mutant
+      @type="TERRAIN"
+	  	@isTrafficOn={{this.isTrafficOn}}
+	  	@isTransitOn={{this.isTransitOn}}
+	  	@isBicyclingOn={{this.isBicyclingOn}}
+	  	@isKmlOn={{this.isKmlOn}}
+	  	@kmlLayerOptions={{this.geoRSSOptions}}
+	  	@continuousWorld={{true}}
+	  	@noWrap={{true}}/>
+  </LeafletMap>
 </div>
+
 <div class="buttons">
-  <button {{action "toggleTraffic"}}>
-    {{#if isTrafficOn}}
+  <button type="button" {{on "click" this.toggleTraffic}}>
+    {{#if this.isTrafficOn}}
       Hide traffic
     {{else}}
       Show traffic
     {{/if}}
   </button>
-  <button {{action "toggleTransit"}}>
-    {{#if isTransitOn}}
+
+  <button type="button" {{on "click" this.toggleTransit}}>
+    {{#if this.isTransitOn}}
       Hide transit
     {{else}}
       Show transit
     {{/if}}
   </button>
-  <button {{action "toggleBicycle"}}>
-    {{#if isBicyclingOn}}
+
+  <button type="button" {{on "click" this.toggleBicycle}}>
+    {{#if this.isBicyclingOn}}
       Hide bicycling layer
     {{else}}
       Show bicycling layer
     {{/if}}
   </button>
-  <button {{action "toggleRSS"}}>
-    {{#if isKmlOn}}
+
+  <button type="button" {{on "click" this.toggleRSS}}>
+    {{#if this.isKmlOn}}
       Hide geo rss
     {{else}}
       Show geo rss

@@ -58,11 +58,11 @@ var ENV = {
 
 ## Usage
 ```handlebars
-{{#leaflet-map lat=lat lng=lng zoom=zoom}}
+<LeafletMap @lat={{this.lat}} @lng={{this.lng}} @zoom={{this.zoom}} as |layers|>
 
-  {{google-mutant-layer type="roadmap" isTrafficOn=true}}
+  <layers.google-mutant @type="roadmap" @isTrafficOn={{true}}/>
 
-{{/leaflet-map}}
+</LeafletMap>
 ```
 
 ### Options
